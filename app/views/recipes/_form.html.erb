@@ -40,6 +40,13 @@
     <%= form.text_area :memo, id: :recipe_memo %>
   </div>
 
+  タグ
+  <div class="check_box" >
+    <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
+      <%= b.label { b.check_box + b.text } %>
+    <% end %>
+  </div>
+
   材料
   <%= form.fields_for :materials do |mat| %>
     <%= render partial: "materials_form", locals: {df: mat } %>

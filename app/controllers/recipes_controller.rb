@@ -87,6 +87,7 @@ class RecipesController < ApplicationController
        :time,
        :memo,
        :photo,
+       tag_ids: [],
        recipe_processes_attributes: [
          :id,
          :text
