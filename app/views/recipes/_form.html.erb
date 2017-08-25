@@ -18,7 +18,11 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_field :description, id: :recipe_description %>
+    <%= form.text_area :description, id: :recipe_description %>
+  </div>
+
+  <div class="field">
+    <%= form.file_field :photo %>
   </div>
 
   <div class="field">
@@ -33,8 +37,19 @@
 
   <div class="field">
     <%= form.label :memo %>
-    <%= form.text_field :memo, id: :recipe_memo %>
+    <%= form.text_area :memo, id: :recipe_memo %>
   </div>
+
+  材料
+  <%= form.fields_for :materials do |mat| %>
+    <%= render partial: "materials_form", locals: {df: mat } %>
+  <% end %>
+
+  調理手順
+  <%= form.fields_for :recipe_processes do |mat| %>
+    <%= render partial: "recipe_processes_form", locals: {df: mat } %>
+  <% end %>
+
 
   <div class="actions">
     <%= form.submit %>

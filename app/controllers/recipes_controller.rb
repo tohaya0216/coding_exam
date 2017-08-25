@@ -15,6 +15,10 @@ class RecipesController < ApplicationController
   # GET /recipes/new
   def new
     @recipe = Recipe.new
+#    @recipe.recipe_processes.build
+#    @recipe.materials.build
+    5.times { @recipe.recipe_processes.build }
+    5.times { @recipe.materials.build }
   end
 
   # GET /recipes/1/edit
@@ -40,6 +44,8 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1
   # PATCH/PUT /recipes/1.json
   def update
+    puts "======"
+    puts params
     respond_to do |format|
       if @recipe.update(recipe_params)
         format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
@@ -68,7 +74,30 @@ class RecipesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+#    def recipe_params
+#      params.require(:recipe).permit(:title, :description, :expense, :time, :memo)
+#    end
+
+    private
     def recipe_params
-      params.require(:recipe).permit(:title, :description, :expense, :time, :memo)
+      params.require(:recipe).permit(
+       :title,
+       :description,
+       :expense,
+       :time,
+       :memo,
+       :photo,
+       recipe_processes_attributes: [
+         :id,
+         :text
+       ],
+       materials_attributes: [
+         :id,
+         :recipe_id,
+         :name,
+         :amount
+       ]
+      )
     end
+
 end

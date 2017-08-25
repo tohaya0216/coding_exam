@@ -11,6 +11,11 @@
 </p>
 
 <p>
+   <strong>Picture:</strong>
+   <%= image_tag @recipe.photo.url(:medium) %>
+</p>
+
+<p>
   <strong>Expense:</strong>
   <%= @recipe.expense %>
 </p>
