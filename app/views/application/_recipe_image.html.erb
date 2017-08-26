@@ -1,0 +1,8 @@
+
+<% if local_recipe.photo.content_type and local_recipe.photo.content_type.include?("video") %>
+  <%= link_to recipe_path(local_recipe) do %>
+    <%= video_tag(local_recipe.photo.url, :autoplay => false ) %>
+  <% end %>
+<% else %>
+  <%= link_to image_tag(local_recipe.photo.url), local_recipe %>
+<% end %>

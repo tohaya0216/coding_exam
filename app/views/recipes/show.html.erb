@@ -1,34 +1,57 @@
 <p id="notice"><%= notice %></p>
-
+<hr>
 <p>
-  <strong>Title:</strong>
-  <%= @recipe.title %>
+  <% if @recipe.photo.content_type and @recipe.photo.content_type.include?("video") %>
+      <%= video_tag(@recipe.photo.url, :autoplay => true ,  :controls => true) %>
+  <% else %>
+    <%= image_tag(@recipe.photo.url) %>
+  <% end %>
 </p>
+<!--
+<%= video_tag(@recipe.photo.url, :autoplay => true)  %>
+-->
+<hr>
+
+<h1><%= @recipe.title %></h1>
 
 <p>
-  <strong>Description:</strong>
   <%= @recipe.description %>
 </p>
 
+<p>調理時間：<%= @recipe.time %>分</p>
+<p>費用目安：<%= @recipe.expense %>円前後</p>
+
 <p>
-   <strong>Picture:</strong>
-   <%= image_tag @recipe.photo.url(:medium) %>
+  <h2>材料</h2>
+  <% @recipe.materials.reject{|m| m.name.blank? }.each do |m| %>
+     <%= m.name %> : <%= m.amount %><br>
+  <% end %>
 </p>
 
 <p>
-  <strong>Expense:</strong>
-  <%= @recipe.expense %>
+  <h2>調理手順</h2>
+  <ol>
+  <% @recipe.recipe_processes.reject{|e| e.text.blank? }.each do |rp| %>
+     <li><%= rp.text %></li>
+  <% end %>
+  </ol>
 </p>
 
 <p>
-  <strong>Time:</strong>
-  <%= @recipe.time %>
-</p>
-
-<p>
-  <strong>Memo:</strong>
+  <h2>料理のコツ・ポイント</h2>
   <%= @recipe.memo %>
 </p>
 
-<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-<%= link_to 'Back', recipes_path %>
+<% @recipe.tags.each do |t| %>
+<h2><%= t.name %> : 同じタグの料理</h2>
+<div class="list">
+  <% if t.recipes.reject{|e| e.id == @recipe.id}.take(3).each do |r| %>
+    <%= render :partial => "recipe_image", :locals => { local_recipe: r }  %>
+  <% end.empty? %>
+    同一のタグの料理はありません
+  <% end %>
+</div>
+<div style="clear:both;"></div>
+<% end %>
+<br>
+<%= link_to 'Edit', edit_recipe_path(@recipe) %>

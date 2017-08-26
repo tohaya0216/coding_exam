@@ -2,6 +2,7 @@ body {
   background-color: #fff;
   color: #333;
   margin: 33px;
+  margin-top: 5px;
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
@@ -26,10 +27,10 @@ a {
     color: #666;
   }
 
-  &:hover {
-    color: #fff;
-    background-color: #000;
-  }
+//  &:hover {
+//    color: #fff;
+//    background-color: #000;
+//  }
 }
 
 th {
@@ -81,4 +82,16 @@ div {
 
 label {
   display: block;
+}
+
+h2 {
+  padding-bottom: 8px;
+  border-bottom: 1px solid #cfcfcf;
+}
+hr {
+    border-top: 1px solid #cccccc;
+}
+
+label.inline {
+   display: inline;
 }

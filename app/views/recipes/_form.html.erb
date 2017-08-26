@@ -12,50 +12,53 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <h2><%= form.label :title %></h2>
     <%= form.text_field :title, id: :recipe_title %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :recipe_description %>
+    <h2><%= form.label :description %></h2>
+    <%= form.text_area :description, id: :recipe_description, size: "80x8" %>
   </div>
 
   <div class="field">
+    <h2><%= form.label :photo %></h2>
     <%= form.file_field :photo %>
   </div>
 
   <div class="field">
-    <%= form.label :expense %>
+    <h2><%= form.label :expense %></h2>
     <%= form.number_field :expense, id: :recipe_expense %>
   </div>
 
   <div class="field">
-    <%= form.label :time %>
+    <h2><%= form.label :time %></h2>
     <%= form.number_field :time, id: :recipe_time %>
   </div>
 
   <div class="field">
-    <%= form.label :memo %>
-    <%= form.text_area :memo, id: :recipe_memo %>
+    <h2><%= form.label :memo %></h2>
+    <%= form.text_area :memo, id: :recipe_memo, size: "80x8" %>
   </div>
 
-  タグ
+  <h2><%= form.label "タグ" %></h2>
   <div class="check_box" >
     <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |b| %>
       <%= b.label { b.check_box + b.text } %>
     <% end %>
   </div>
 
-  材料
+  <h2><%= form.label "材料" %></h2>
   <%= form.fields_for :materials do |mat| %>
     <%= render partial: "materials_form", locals: {df: mat } %>
   <% end %>
 
-  調理手順
+  <h2>調理手順</h2>
+  <ol style="list-style-type: decimal">
   <%= form.fields_for :recipe_processes do |mat| %>
-    <%= render partial: "recipe_processes_form", locals: {df: mat } %>
+    <li><%= render partial: "recipe_processes_form", locals: {df: mat } %></li>
   <% end %>
+  </ol>
 
 
   <div class="actions">

@@ -1,55 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Recipes</h1>
 
-<table border=1>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Expense</th>
-      <th>Time</th>
-      <th>Memo</th>
-      <th colspan="3"></th>
-      <th>材料</th>
-      <th>手順</th>
-      <th>Tag</th>
-      <th>photo</th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.description %></td>
-        <td><%= recipe.expense %></td>
-        <td><%= recipe.time %></td>
-        <td><%= recipe.memo %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td>
-          <% recipe.materials.each do |m| %>
-             <%= m.name %> : <%= m.amount %><br>
-          <% end %>
-        </td>
-        <td>
-          <% recipe.recipe_processes.each do |rp| %>
-             <%= rp.text %><br>
-          <% end %>
-        </td>
-        <td>
-          <% recipe.tag.each do |t| %>
-             <%= t.name %><br>
-          <% end %>
-        </td>
-        <td>   <%= image_tag recipe.photo.url(:medium) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="list">
+  <% @recipes.each do |recipe| %>
+    <div class="video">
+      <%= render :partial => "recipe_image", :locals => { local_recipe: recipe }  %>
 
-<br>
+       <p><%= link_to recipe.title, recipe %></p>
+       <p><%= recipe.description %></p>
+    </div>
+  <% end %>
+</div>
 
-<%= link_to 'New Recipe', new_recipe_path %>
+<div class="clearfix"></div>
+
+<%= link_to 'レシピを新しく投稿する', new_recipe_path %>

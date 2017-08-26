@@ -2,7 +2,7 @@
 
 <h1>Recipes</h1>
 
-<table>
+<table border=1>
   <thead>
     <tr>
       <th>Title</th>
@@ -11,6 +11,10 @@
       <th>Time</th>
       <th>Memo</th>
       <th colspan="3"></th>
+      <th>材料</th>
+      <th>手順</th>
+      <th>Tag</th>
+      <th>photo</th>
     </tr>
   </thead>
 
@@ -25,6 +29,22 @@
         <td><%= link_to 'Show', recipe %></td>
         <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
         <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <% recipe.materials.each do |m| %>
+             <%= m.name %> : <%= m.amount %><br>
+          <% end %>
+        </td>
+        <td>
+          <% recipe.recipe_processes.each do |rp| %>
+             <%= rp.text %><br>
+          <% end %>
+        </td>
+        <td>
+          <% recipe.tags.each do |t| %>
+             <%= t.name %><br>
+          <% end %>
+        </td>
+        <td>   <%= image_tag recipe.photo.url %></td>
       </tr>
     <% end %>
   </tbody>

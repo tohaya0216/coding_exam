@@ -1,6 +1,8 @@
-<div style="background-color:yellow;">
+<div style="">
   <div class="field">
+    <%= df.label :name, {class: 'inline'} %>
     <%= df.text_field :name %>
+    <%= df.label :amount, {class: 'inline'} %>
     <%= df.text_field :amount %>
     <%= df.hidden_field :id %>
   </div>
